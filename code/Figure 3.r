@@ -1,3 +1,10 @@
+###############################
+# title : Figure 3
+# author : Jaemyung, Jang (piloter2@kbri.re.kr)
+# kenel : R 4.3.0
+# Date : Dec. 18, 2023
+###############################
+
 library(data.table)
 library(dplyr)
 library(ggVennDiagram)
@@ -29,7 +36,7 @@ read_and_clean_data <- function(filenames) {
 }
 
 # Read protein data
-protein_data_list <- read_and_clean_data(rawPD_files)
+protein_data_list <- read_and_clean_data(rawPD_files[c(3:4)]])
 
 # Extract counts data for specific cell lines
 extract_counts <- function(data_list, pattern) {
@@ -99,14 +106,11 @@ gene_names_list <- lapply(1:4, function(k) get_gene_names(protein_data_list, k))
 create_summarized_experiment <- function(data, design, count_data_index) {
   # Merge count data with gene names
   merged_data <- merge(count_data_index, data, by = "Accession")
-  
-  # Create the SummarizedExperiment object
-  # ... You would insert the code to create the SummarizedExperiment object here ...
 }
 
 # Run for all the specified indexes
-summarized_experiments <- lapply(1:4, function(k) {
-  create_summarized_experiment(gene_names_list[[k]], design, protein_data_list[[k+3]])
+summarized_experiments <- lapply(c(1:4), function(k) {
+  create_summarized_experiment(gene_names_list[[k]], design, protein_data_list[[k]])
 })
 
 library(SingleCellExperiment)
@@ -151,7 +155,7 @@ combine_sces <- function(se1, se2) {
 }
 
 # Assuming summarized_experiments is a list of SingleCellExperiment objects
-sce_A <- create_and_process_se(summarized_experiments, 1)
+sce_A <- create_and_process_se(summarized_experiments, 3)
 sce_B <- create_and_process_se(summarized_experiments, 4)
 
 # Find and model the gene variance for both experiments
