@@ -125,7 +125,7 @@ DotPlot(dat.combined, idents = names(table(Idents(dat.combined))[which(table(Ide
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
 
 # Read marker file and prepare for UCell scoring
-SCP.marker <- readRDS("/choelab/SCP/data/SCP_markers_20231011.RDS")
+SCP.marker <- readRDS("/choelab/SCP/proteomeDatafromPD/SCP_markers_20231011.RDS")
 
 # Extract markers for each cluster
 marker <- list(
