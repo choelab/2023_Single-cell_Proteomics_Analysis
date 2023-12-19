@@ -136,8 +136,7 @@ create_and_process_se <- function(se_list, index, assay_name = "counts") {
   
   # Set assay names and sample column data
   assayNames(se) <- c(assay_name, "logcounts")
-  colData(se)$sample <- as.character(202300 + index)
-  
+ 
   return(se)
 }
 
@@ -157,6 +156,10 @@ combine_sces <- function(se1, se2) {
 # Assuming summarized_experiments is a list of SingleCellExperiment objects
 sce_A <- create_and_process_se(summarized_experiments, 3)
 sce_B <- create_and_process_se(summarized_experiments, 4)
+
+colData(sce_A)$sample <- "202301"
+colData(sce_B)$sample <- "202303" 
+
 
 # Find and model the gene variance for both experiments
 gene_var_rep1 <- modelGeneVar(sce_A)
