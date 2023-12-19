@@ -89,12 +89,6 @@ dat.combined <- dat.ref %>%
 
 Idents(dat.combined) <- "SCT_snn_res.0.7"
 
-# Figure5a. Visualization
-
-DimPlot(dat.combined, group.by = "Population", label = TRUE, label.size = 5, pt.size = 0.01, raster = FALSE) +
-  theme(legend.position = "none", axis.title = element_blank(), plot.title = element_text(size = 12, face = "bold", hjust = 0), 
-        axis.line = element_blank(), axis.text = element_blank(), axis.ticks = element_blank()) +
-  ggtitle("")
 
 library(reshape2)
 library(UCell)
@@ -113,10 +107,13 @@ assign_population <- function(dat.combined) {
 # Update dat.combined with population information
 dat.combined <- assign_population(dat.combined)
 
-# Dimensionality reduction plot
-DimPlot(dat.combined, label = TRUE, label.size = 5, pt.size = 0.01, raster = FALSE) +
-  theme(legend.position = "none", axis.title = element_blank(), axis.line = element_blank(),
-        axis.text = element_blank(), axis.ticks = element_blank()) +
+
+
+# Figure5a. Visualization
+
+Figure5a_left <- DimPlot(dat.combined, group.by = "Population", label = TRUE, label.size = 5, pt.size = 0.01, raster = FALSE) +
+  theme(legend.position = "none", axis.title = element_blank(), plot.title = element_text(size = 12, face = "bold", hjust = 0), 
+        axis.line = element_blank(), axis.text = element_blank(), axis.ticks = element_blank()) +
   ggtitle("")
 
 # Supplementary Figure. Dot plot for specified genes
@@ -397,7 +394,7 @@ clusterlist <- drawHeatmapAndGetClusters(htkm[[3]])
 clu_df <- generateClusterDataFrame(clusterlist, pt.matrix)
 
 # Figure5b. Venn Diagram of common genes between scRNAseq and scProteomics
-pg <- performVennDiagramAnalysis(commonGenes)
+Figure5b <- performVennDiagramAnalysis(commonGenes)
 
 # Enrichment analysis
 databases <- enrichR::listEnrichrDbs()$libraryName
@@ -406,7 +403,7 @@ enrich_results_S <- performEnrichmentAnalysis(commonGenes[[1]], dbs)
 enrich_results_P <- performEnrichmentAnalysis(commonGenes[[2]], dbs)
 
 # Figure5e. Generate comparison plot
-pbar <- generateEnrichmentComparisonPlot(enrich_results_S, enrich_results_P, dbs)
+Figure5e <- generateEnrichmentComparisonPlot(enrich_results_S, enrich_results_P, dbs)
 
 df_results <- data.frame()
 
@@ -429,7 +426,7 @@ processEnrichResults(enrich_results.P, dbs, "scProteomics", filter_scProteomics)
 processEnrichResults(enrich_results.S, dbs, "scRNA-seq", filter_scRNAseq)
 
 # Figure 5f. Plotting
-ggplot(df_results, aes(Term, -log10(Adjusted.P.value))) +
+Figure5f <- ggplot(df_results, aes(Term, -log10(Adjusted.P.value))) +
   geom_bar(stat = "identity", aes(fill = group)) +
   scale_fill_aaas() +
   xlab("") +
