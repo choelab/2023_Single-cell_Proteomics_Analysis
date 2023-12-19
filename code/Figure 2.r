@@ -5,11 +5,11 @@ source(paste0(path, "/code/proteomic_function_20231218.r"))
 
 # Define file patterns for raw data
 rawPD_pattern <- "_Proteins.txt$"
-rawPeptide_pattern <- "_PeptideGroups.txt$"
+# rawPeptide_pattern <- "_PeptideGroups.txt$"
 
 # Get the list of files matching the pattern
-rawPD <- list.files(list.dirs(path), pattern = rawPD_pattern, full.names = TRUE)
-rawPeptide <- list.files(list.dirs(path), pattern = rawPeptide_pattern, full.names = TRUE)
+rawPD <- list.files(list.dirs(paste0(path,"proteomicDatafromPD")), pattern = rawPD_pattern, full.names = TRUE)
+# rawPeptide <- list.files(list.dirs(paste0(path,"proteomicDatafromPD")), pattern = rawPeptide_pattern, full.names = TRUE)
 
 # Function to clean column names
 clean_colnames <- function(df) {
@@ -27,7 +27,7 @@ read_and_clean <- function(filenames) {
 
 # Read protein and peptide data
 datafromPD <- read_and_clean(rawPD)
-peptidefromPD <- read_and_clean(rawPeptide)
+#peptidefromPD <- read_and_clean(rawPeptide)
 
 # Process the counts data
 counts <- lapply(datafromPD, function(data) {
@@ -36,10 +36,10 @@ counts <- lapply(datafromPD, function(data) {
 })
 
 # Process the peptide counts data
-Peptidecounts <- lapply(peptidefromPD, function(data) {
-  data %>%
-    select(Annotated.Sequence, starts_with("Found.in."))
-})
+# Peptidecounts <- lapply(peptidefromPD, function(data) {
+#  data %>%
+#    select(Annotated.Sequence, starts_with("Found.in."))
+# })
 
 # Function to subset data based on cell number
 subset_counts_by_number <- function(cnt, pattern) {
@@ -47,7 +47,7 @@ subset_counts_by_number <- function(cnt, pattern) {
 }
 
 # Create a list of data frames for different cell numbers
-count.number <- lapply(counts[c(1:3)], function(cnt) {
+count.number <- lapply(counts[[2]], function(cnt) {
   lapply(c("1_None$", "2_5cells$", "3_10cells$", "4_50cells$", "5_100cells$"), 
          subset_counts_by_number, cnt = cnt)
 })
