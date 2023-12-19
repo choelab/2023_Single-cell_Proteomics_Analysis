@@ -1,3 +1,10 @@
+###############################
+# title : Figure 2
+# author : Jaemyung, Jang (piloter2@kbri.re.kr)
+# kenel : R 4.3.0
+# Date : Dec. 18, 2023
+###############################
+
 # Define the path to the data directory
 path <- file.path("/", "choelab", "SCP")
 
