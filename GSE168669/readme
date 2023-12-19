@@ -1,3 +1,7 @@
+You can download the single-cell RNA-seq analysis files for the study "GSE168669" from the NCBI Gene Expression Omnibus (GEO) database. 
+The study includes single-cell RNA sequencing of parental LNCaP cells (DMSO treated), LNCaP cells treated with enzalutamide, and LNCaP-derived enzalutamide-resistant RES-A and RES-B cells. 
+The data is publicly available and can be accessed via the following link: GSE168668 on NCBI GEO. T
+he download options include RAW data in TAR format (199.6 Mb) containing MTX and TSV files
 https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE168669
 
 GSM5155451_LNCaP-DMSO_barcodes.tsv.gz
