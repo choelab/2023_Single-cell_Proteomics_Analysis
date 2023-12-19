@@ -440,6 +440,3 @@ Figure5f <- ggplot(df_results, aes(Term, -log10(Adjusted.P.value))) +
         legend.background = element_blank()) +
   coord_flip() +
   facet_wrap(~type)
-
-# Display the plot
-print(pPATHWAYs)
