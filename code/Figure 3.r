@@ -36,7 +36,7 @@ read_and_clean_data <- function(filenames) {
 }
 
 # Read protein data
-protein_data_list <- read_and_clean_data(rawPD_files[c(3:4)]])
+protein_data_list <- read_and_clean_data(rawPD_files)
 
 # Extract counts data for specific cell lines
 extract_counts <- function(data_list, pattern) {
