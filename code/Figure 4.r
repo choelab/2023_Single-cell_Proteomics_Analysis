@@ -247,7 +247,7 @@ for(geneX in unique(unlist(str_split(df_results$Genes, ";")))) {
   # Filter out very low expressions
   cds_df_filtered <- cds_df[cds_df$expression > 1e-10, ]
   
-  # Generate the plot
+  # Figure3d. Generate the plot
   pseudo[[geneX]] <- ggplot(cds_df_filtered, aes(x = pseudotime, y = log10(expression))) +
     geom_point() +
     geom_smooth(method = "glm", formula = y ~ splines::bs(x, 3), se = TRUE, fullrange = TRUE) +
