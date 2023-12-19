@@ -1,3 +1,10 @@
+###############################
+# title : Figure 4
+# author : Jaemyung, Jang (piloter2@kbri.re.kr)
+# kenel : R 4.3.0
+# Date : Dec. 18, 2023
+###############################
+
 library(monocle3)
 library(sceasy)
 library(gam)
@@ -14,7 +21,8 @@ get_correct_root_state <- function(cds, cell_phenotype, root_type) {
   root_pr_nodes
 }
 
-# Prepare data for Monocle
+# sce_combined : from Figure 3
+# Prepare data for Monocle3
 pData <- sce_combined@colData
 fData <- data.frame(gene_short_name = rownames(sce_combined), row.names = rownames(sce_combined))
 expression_matrix <- assays(sce_combined)$counts
@@ -157,7 +165,7 @@ plot_correlation_results <- function(cor_results, x_label, y_label) {
     theme_bw()
 }
 
-# Figure3b. Plot for pseudotime
+# Figure4b. Plot for pseudotime
 plot_correlation_results(cor_res_pseudotime_formatted, "Spearman's correlation coeffient to pseudotime", "-Log10 P-value")
 
 library(ComplexHeatmap)
@@ -218,7 +226,7 @@ df_results <- rbind(
   format_enrichment_results(enrich_results.n, "Negative")
 )
 
-# Figure3c. Visualization of enrichment results
+# Figure4c. Visualization of enrichment results
 ggplot(df_results, aes(Term, -log10(Adjusted.P.value))) +
   geom_bar(stat = "identity", aes(fill = group)) +
   scale_fill_aaas() +
@@ -247,7 +255,7 @@ for(geneX in unique(unlist(str_split(df_results$Genes, ";")))) {
   # Filter out very low expressions
   cds_df_filtered <- cds_df[cds_df$expression > 1e-10, ]
   
-  # Figure3d. Generate the plot
+# Figure4d. Generate the plot
   pseudo[[geneX]] <- ggplot(cds_df_filtered, aes(x = pseudotime, y = log10(expression))) +
     geom_point() +
     geom_smooth(method = "glm", formula = y ~ splines::bs(x, 3), se = TRUE, fullrange = TRUE) +
