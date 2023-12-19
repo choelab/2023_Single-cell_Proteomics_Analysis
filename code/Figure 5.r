@@ -1,3 +1,10 @@
+###############################
+# title : Figure 5
+# author : Jaemyung, Jang (piloter2@kbri.re.kr)
+# kenel : R 4.3.0
+# Date : Dec. 18, 2023
+###############################
+
 library(Seurat)
 library(scCustomize)
 library(harmony)
@@ -44,7 +51,7 @@ processA <- function(run) {
 # Reading and preprocessing data
 refObj_GSE168669 <- list()
 refObj_GSE168669.obj <- list()
-data_dir <- file.path("choelab","SCP","GSE168669")
+data_dir <- file.path("choelab","SCP","GSE168669") #You can download the single-cell RNA-seq analysis files for the study "GSE168669" from the NCBI Gene Expression Omnibus (GEO) database. 
 
 # List of sample names to read
 sample_list <- c("GSM5155455_LNCaP-DMSO_", "GSM5155456_LNCaP-ENZ48_", "GSM5155457_LNCaP-RESA_", 
